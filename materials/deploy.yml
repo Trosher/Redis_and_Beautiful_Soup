@@ -1,0 +1,18 @@
+- name: package installation
+  ansible.builtin.package:
+    name:
+      - python3
+      - nginx
+    state: present
+- name: file copying
+  ansible.builtin.copy:
+    src:
+      - ../src/exploit.py
+      - ../src/ex01consumer.py
+    dest:
+      - /etc/exploit.py
+      - /etc/consumer.py
+- name: script launch
+  ansible.builtin.command:
+    - python /etc/consumer.py 4815162342,3133780085
+    - python /etc/exploit.py
